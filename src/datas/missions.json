@@ -2,8 +2,7 @@
   {
     "id": 0,
     "title": "The Shawshank Redemption",
-    "start": "2024-05-03",
-    "end": "2024-05-06",
+    "date": "2024-05-03",
     "description": "Lorem ipsum 1",
     "isDraggable": true
   },
