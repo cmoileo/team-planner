@@ -1,26 +1,29 @@
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
-import {MissionDto} from "../../../domain/dto/Mission.dto.ts";
-import {useCalendarViewModel} from "./calendar.viewModel.tsx";
-import MainText from "../../../../../ui/MainText.tsx";
+import { MissionDto } from "../../../domain/dto/Mission.dto.ts";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
-export const CalendarLayout = ({missions}: {missions: MissionDto[]}) => {
-    const {handleEventMouseEnter, descriptionRef}: {
-        handleEventMouseEnter: (arg: any) => void;
-        descriptionRef: any;
-    } = useCalendarViewModel();
+export const CalendarLayout = ({ missions }: { missions: MissionDto[] }) => {
 
     return (
-        <div>
-            <MainText htmltag={"p"} children={"test"} className={"p-2 rounded-sm bg-blue-50 w-fit"} ref={descriptionRef}/>
+        <div className="calendar-container">
             <FullCalendar
-                plugins={[ dayGridPlugin ]}
+                plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
-                events={missions.map(({ id, ...rest }) => rest)}
+                events={missions.map(({id, ...rest}) => rest)}
                 eventDidMount={(arg) => {
-                    arg.el.addEventListener("mouseenter", () => handleEventMouseEnter(arg));
+                    arg.el.setAttribute("data-for", `my-tooltip-${arg.event.id}`);
                 }}
             />
+            {
+                missions.map((mission, index) => (
+                    <ReactTooltip
+                        id={`my-tooltip-${index}`}
+                        place="bottom"
+                        content={mission.description}
+                    />
+                ))
+            }
         </div>
-    )
-}
+    );
+};
