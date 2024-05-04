@@ -3,24 +3,28 @@
     "id": 0,
     "title": "The Shawshank Redemption",
     "start": "2024-05-03",
-    "end": "2024-05-06"
+    "end": "2024-05-06",
+    "description": "Lorem ipsum"
   },
   {
     "id": 1,
     "title": "The Godfather",
     "date": "2024-05-03",
-    "backgroundColor": "red"
+    "backgroundColor": "red",
+    "description": "Lorem ipsum"
   },
   {
     "id": 2,
     "title": "The Dark Knight",
     "date": "2024-05-03",
-    "backgroundColor": "green"
+    "backgroundColor": "green",
+    "description": "Lorem ipsum"
   },
   {
     "id": 3,
     "title": "12 Angry",
     "date": "2024-05-03",
-    "backgroundColor": "blue"
+    "backgroundColor": "blue",
+    "description": "Lorem ipsum"
   }
 ]

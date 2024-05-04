@@ -1,6 +1,14 @@
-import { useRef} from "react";
+import {Dispatch, SetStateAction, useRef} from "react";
+import {MissionDto} from "../../../domain/dto/Mission.dto.ts";
 
-export const useAddMissionViewModel = () => {
+export const useAddMissionViewModel = (
+    {
+        missions,
+        setMissions
+    }: {
+        missions: MissionDto[] | null,
+        setMissions: Dispatch<SetStateAction<MissionDto[]>>
+    }) => {
     const modalRef = useRef<HTMLFormElement>(null);
     const shadowRef = useRef<HTMLDivElement>(null);
     const handleOpenModal = () => {
@@ -15,10 +23,19 @@ export const useAddMissionViewModel = () => {
     }
 
     const handleAddMission = (e: React.FormEvent) => {
+        if (!modalRef.current) return console.error("Ref not found")
         handleOpenModal()
         e.preventDefault()
         const target = e.target as HTMLFormElement
-        console.log(target)
+        const newMission: MissionDto = {
+            id: missions ? missions.length : 0,
+            title: target.missionTitle.value,
+            description: target.description.value,
+            date: target.date.value,
+            backgroundColor: target.color.value
+        }
+        missions ? setMissions([...missions, newMission]) : setMissions([newMission])
+        modalRef.current.reset()
     }
 
     return {
