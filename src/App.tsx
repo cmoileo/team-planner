@@ -1,4 +1,4 @@
-import './App.css'
+import './index.css'
 import {PlanningPage} from "./modules/planning/presentation/page/Page.tsx";
 
 function App() {

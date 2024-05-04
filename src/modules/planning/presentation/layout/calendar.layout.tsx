@@ -1,14 +1,14 @@
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
-import {EventDto} from "../../domain/dto/Event.dto.ts";
+import {MissionDto} from "../../domain/dto/Mission.dto.ts";
 
-export const CalendarLayout = ({events}: {events: EventDto[]}) => {
+export const CalendarLayout = ({missions}: {missions: MissionDto[]}) => {
     return (
         <div>
             <FullCalendar
                 plugins={[ dayGridPlugin ]}
                 initialView="dayGridMonth"
-                events={events}
+                events={missions.map(({ id, ...rest }) => rest)}
             />
         </div>
     )

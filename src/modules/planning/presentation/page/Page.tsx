@@ -1,14 +1,13 @@
 import {CalendarLayout} from "../layout/calendar.layout.tsx";
+import {MissionDto} from "../../domain/dto/Mission.dto.ts";
+import {useState} from "react";
+import dataMissions from "../../../../datas/missions.json";
 
 export const PlanningPage = () => {
-    const events = [
-        { title: 'event 1', date: '2024-05-01' },
-        { title: 'event 2', date: '2024-05-02' },
-        { title: 'event 3', date: '2024-05-03' },
-    ]
+    const [missions] = useState<MissionDto[]>(dataMissions);
     return (
         <div>
-            <CalendarLayout events={events} />
+            <CalendarLayout missions={missions} />
         </div>
     )
 }
