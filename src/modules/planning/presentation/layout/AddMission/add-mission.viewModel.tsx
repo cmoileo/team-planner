@@ -17,6 +17,8 @@ export const useAddMissionViewModel = () => {
     const handleAddMission = (e: React.FormEvent) => {
         handleOpenModal()
         e.preventDefault()
+        const target = e.target as HTMLFormElement
+        console.log(target)
     }
 
     return {
