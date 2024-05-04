@@ -2,21 +2,25 @@
   {
     "id": 0,
     "title": "The Shawshank Redemption",
-    "date": "2024-05-03"
+    "start": "2024-05-03",
+    "end": "2024-05-06"
   },
   {
     "id": 1,
     "title": "The Godfather",
-    "date": "2024-05-03"
+    "date": "2024-05-03",
+    "backgroundColor": "red"
   },
   {
     "id": 2,
     "title": "The Dark Knight",
-    "date": "2024-05-03"
+    "date": "2024-05-03",
+    "backgroundColor": "green"
   },
   {
     "id": 3,
     "title": "12 Angry",
-    "date": "2024-05-03"
+    "date": "2024-05-03",
+    "backgroundColor": "blue"
   }
 ]
