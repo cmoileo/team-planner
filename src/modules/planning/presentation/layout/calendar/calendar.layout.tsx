@@ -19,6 +19,22 @@ export const CalendarLayout = ({ missions, setMissions }: { missions: MissionDto
                 events={missions.map(({ id, ...rest }) => rest)}
                 eventDidMount={(arg) => {
                     arg.el.dataset.tooltipId = `my-tooltip-${index}`;
+                    const eventTitleElement = arg.el.querySelector(".fc-event-title.fc-sticky");
+                    const newInput = document.createElement("input");
+                    newInput.value = eventTitleElement?.textContent || "";
+                    newInput.type = "text";
+                    newInput.className = "w-full bg-transparent border-none";
+                    newInput.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                    });
+
+                    if (eventTitleElement) {
+                        eventTitleElement.innerHTML = "";
+                        eventTitleElement.appendChild(newInput);
+
+                        // Assurer que l'élément <input> obtient le focus
+                        newInput.focus();
+                    }
                     index++;
                 }}
                 droppable={true}

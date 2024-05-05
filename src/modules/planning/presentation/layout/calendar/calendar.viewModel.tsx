@@ -31,8 +31,13 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
         } else if (!endDateA && endDateB) {
             return 1;
         }
+        if (startDateA && startDateB && startDateA.getTime() === startDateB.getTime() &&
+            endDateA && endDateB && endDateA.getTime() === endDateB.getTime()) {
+            return missions.indexOf(b) - missions.indexOf(a);
+        }
         return missions.indexOf(a) - missions.indexOf(b);
     });
+
 
 
     const tooltips = sortedMissions.map((mission, index) => (
