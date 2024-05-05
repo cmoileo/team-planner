@@ -2,21 +2,11 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
 import { MissionDto } from "../../../domain/dto/Mission.dto.ts";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import {useCalendarViewModel} from "./calendar.viewModel.tsx";
 
 export const CalendarLayout = ({ missions }: { missions: MissionDto[] }) => {
+    const {sortedMissions} = useCalendarViewModel({missions});
     let index = 0;
-
-    const filteredMissions = missions.filter(mission => mission.date);
-
-    const sortedMissions = filteredMissions.sort((a, b) => {
-        const dateA = new Date(a.date!);
-        const dateB = new Date(b.date!);
-
-        if (dateA.getTime() === dateB.getTime()) {
-            return missions.indexOf(b) - missions.indexOf(a);
-        }
-        return dateA.getTime() - dateB.getTime();
-    });
 
     const tooltips = sortedMissions.map((mission, index) => (
         <ReactTooltip

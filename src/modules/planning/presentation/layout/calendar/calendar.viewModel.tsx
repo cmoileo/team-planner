@@ -1,19 +1,19 @@
-import { useRef } from "react";
+import {MissionDto} from "../../../domain/dto/Mission.dto.ts";
 
-export const useCalendarViewModel = () => {
-    const descriptionRef = useRef<HTMLDivElement>(null);
+export const useCalendarViewModel = ({missions}: {missions: MissionDto[]}) => {
+    const filteredMissions = missions.filter(mission => mission.date);
 
-    const handleEventMouseEnter = (arg: any) => {
-        if (!descriptionRef.current) return;
+    const sortedMissions = filteredMissions.sort((a, b) => {
+        const dateA = new Date(a.date!);
+        const dateB = new Date(b.date!);
 
-        descriptionRef.current.innerText = arg.event.extendedProps.description;
-        console.log(arg)
-        // descriptionRef.current.style.top = `${arg.el.clientY}px`;
-        // descriptionRef.current.style.left = `${arg.el.clientX}px`;
-    };
+        if (dateA.getTime() === dateB.getTime()) {
+            return missions.indexOf(b) - missions.indexOf(a);
+        }
+        return dateA.getTime() - dateB.getTime();
+    });
 
     return {
-        handleEventMouseEnter,
-        descriptionRef
+        sortedMissions
     };
 };
