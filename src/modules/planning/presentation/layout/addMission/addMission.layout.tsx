@@ -9,12 +9,16 @@ export const AddMissionLayout = (
         missions,
         setMissions,
         users,
+        filteredMissions,
+        setFilteredMissions
     }: {
         missions: MissionDto[] | null,
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
         users: UserDto[],
+        filteredMissions: MissionDto[] | null,
+        setFilteredMissions: Dispatch<SetStateAction<MissionDto[]>>
     }) => {
-    const {handleOpenModal, handleAddMission, modalRef, shadowRef} = useAddMissionViewModel({missions, setMissions});
+    const {handleOpenModal, handleAddMission, modalRef, shadowRef} = useAddMissionViewModel({missions, setMissions, filteredMissions, setFilteredMissions});
     return (
         <div>
             <div className={"flex justify-between"}>

@@ -5,9 +5,13 @@ export const useAddMissionViewModel = (
     {
         missions,
         setMissions,
+        filteredMissions,
+        setFilteredMissions
     }: {
         missions: MissionDto[] | null,
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
+        filteredMissions: MissionDto[] | null,
+        setFilteredMissions: Dispatch<SetStateAction<MissionDto[]>>
     }) => {
     const modalRef = useRef<HTMLFormElement>(null);
     const shadowRef = useRef<HTMLDivElement>(null);
@@ -41,6 +45,7 @@ export const useAddMissionViewModel = (
             })
         }
         missions ? setMissions([...missions, newMission]) : setMissions([newMission])
+        filteredMissions ? setFilteredMissions([...filteredMissions, newMission]) : setFilteredMissions([newMission])
         modalRef.current.reset()
     }
 
