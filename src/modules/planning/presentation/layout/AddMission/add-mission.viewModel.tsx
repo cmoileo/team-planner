@@ -32,7 +32,8 @@ export const useAddMissionViewModel = (
             missionId: missions ? missions.length : 0,
             title: target.missionTitle.value,
             description: target.description.value,
-            date: target.date.value,
+            start: target.start.value,
+            end: target.end.value,
             backgroundColor: target.color.value,
             assignedUsers: Array.from(target.assignedUsers.selectedOptions).map((option: any): number => {
                 const value = option.value

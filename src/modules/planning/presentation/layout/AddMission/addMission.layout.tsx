@@ -4,7 +4,6 @@ import MainText from "../../../../../ui/MainText.tsx";
 import {MissionDto} from "../../../domain/dto/Mission.dto.ts";
 import {Dispatch, SetStateAction} from "react";
 import {UserDto} from "../../../domain/dto/User.dto.ts";
-
 export const AddMissionLayout = (
     {
         missions,
@@ -25,8 +24,10 @@ export const AddMissionLayout = (
                 <input required type="text" name={"missionTitle"} placeholder={"Title"} />
                 <MainText htmltag={"label"} children={"Mission description"} />
                 <textarea required name={"description"} placeholder={"Description"} />
-                <MainText htmltag={"label"} children={"Mission date"} />
-                <input required type="date" name={"date"} />
+                <MainText htmltag={"label"} children={"Mission start date"} />
+                <input required type="date" name={"start"} />
+                <MainText htmltag={"label"} children={"Mission end date"} />
+                <input required type="date" name={"end"} />
                 <MainText htmltag={"label"} children={"Mission color"} />
                 <input required type="color" name={"color"} />
                 <MainText htmltag={"label"} children={"Assigned users"} />

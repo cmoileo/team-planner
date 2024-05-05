@@ -30,7 +30,7 @@ export const sortedMissions = (missions: MissionDto[], filteredMissions: Mission
 
         if (startDateA && startDateB && startDateA.getTime() === startDateB.getTime() &&
             endDateA && endDateB && endDateA.getTime() === endDateB.getTime()) {
-            return missions.indexOf(b) - missions.indexOf(a);
+            return a.title.localeCompare(b.title);
         }
 
         return missions.indexOf(a) - missions.indexOf(b);

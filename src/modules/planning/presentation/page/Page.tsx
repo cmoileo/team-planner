@@ -8,10 +8,10 @@ import {UserDto} from "../../domain/dto/User.dto.ts";
 
 export const PlanningPage = () => {
     const [missions, setMissions] = useState<MissionDto[]>(dataMissions);
-    const [users, setUsers] = useState<UserDto[]>(dataUsers);
+    const [users] = useState<UserDto[]>(dataUsers);
     return (
         <div className={"w-10/12 m-auto flex flex-col gap-12 mt-20 pb-16"}>
-            <AddMissionLayout missions={missions} setMissions={setMissions} users={users} setUsers={setUsers} />
+            <AddMissionLayout missions={missions} setMissions={setMissions} users={users} />
             <CalendarLayout missions={missions} setMissions={setMissions} users={users} />
         </div>
     )

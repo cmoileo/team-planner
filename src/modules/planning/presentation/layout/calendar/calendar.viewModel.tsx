@@ -18,6 +18,17 @@ export const useCalendarViewModel = (
     let index = 0;
     const filteredMissions = missions.filter(mission => mission.start && mission.end);
 
+    const handleMountEvent = (arg: any) => {
+        arg.el.dataset.tooltipId = `my-tooltip-${index}`;
+        arg.el.dataset.id = index.toString();
+        const eventContainer = arg.el.querySelector(".fc-event-title-container");
+        eventContainer?.classList.add("flex");
+        eventContainer?.classList.add("justify-between");
+        addAssignedUsersImages(arg, eventContainer);
+        handleCreateCrossIcon(arg, eventContainer);
+        index++;
+    }
+
     const tooltips = sortedMissions(missions, filteredMissions).map((mission, index) => (
         <ReactTooltip
             id={`my-tooltip-${index}`}
@@ -53,16 +64,6 @@ export const useCalendarViewModel = (
             userImage.className = "w-6 h-6 rounded-full";
             imagesContainer?.appendChild(userImage);
         });
-    }
-    const handleMountEvent = (arg: any) => {
-        arg.el.dataset.tooltipId = `my-tooltip-${index}`;
-        arg.el.dataset.id = index.toString();
-        const eventContainer = arg.el.querySelector(".fc-event-title-container");
-        eventContainer?.classList.add("flex");
-        eventContainer?.classList.add("justify-between");
-        addAssignedUsersImages(arg, eventContainer);
-        handleCreateCrossIcon(arg, eventContainer);
-        index++;
     }
     const findMissionByDescription = (description: string) => {
         return missions.find(mission => mission.description === description);

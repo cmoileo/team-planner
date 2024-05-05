@@ -2,7 +2,7 @@
   {
     "id": 0,
     "missionId": 0,
-    "title": "The Shawshank Redemption",
+    "title": "Mission 1",
     "start": "2024-05-03",
     "end": "2024-05-04",
     "description": "Lorem ipsum 1",
@@ -12,7 +12,7 @@
   {
     "id": 1,
     "missionId": 1,
-    "title": "The Godfather",
+    "title": "Mission 2",
     "start": "2024-05-03",
     "end": "2024-05-05",
     "backgroundColor": "red",
@@ -22,7 +22,7 @@
   {
     "id": 2,
     "missionId": 2,
-    "title": "The Dark Knight",
+    "title": "Mission 3",
     "start": "2024-05-03",
     "end": "2024-05-04",
     "backgroundColor": "green",
@@ -32,7 +32,7 @@
   {
     "id": 3,
     "missionId": 3,
-    "title": "12 Angry",
+    "title": "Mission 4",
     "start": "2024-05-03",
     "end": "2024-05-05",
     "backgroundColor": "blue",
