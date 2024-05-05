@@ -5,6 +5,7 @@ import {sortedMissions} from "../../../domain/use-case/sort-mission.service.ts";
 import {convertDate} from "../../../domain/use-case/convert-date.service.ts";
 
 export const useCalendarViewModel = ({missions, setMissions}: {missions: MissionDto[], setMissions: Dispatch<SetStateAction<MissionDto[]>>}) => {
+    let index = 0;
     const filteredMissions = missions.filter(mission => mission.start && mission.end);
 
     const tooltips = sortedMissions(missions, filteredMissions).map((mission, index) => (
@@ -16,6 +17,24 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
             content={mission.description}
         />
     ));
+
+    const handleMountEvent = (arg: any) => {
+        arg.el.dataset.tooltipId = `my-tooltip-${index}`;
+        arg.el.dataset.id = index.toString();
+        const eventContainer = arg.el.querySelector(".fc-event-title-container");
+        eventContainer?.classList.add("flex");
+        eventContainer?.classList.add("justify-between");
+        const crossIcon = document.createElement("span");
+        crossIcon.className = "cross-icon relative right-2";
+        crossIcon.innerHTML = "&times;";
+        crossIcon.onclick = () => {
+            if (!arg.el.dataset.id) return;
+            const selectedMission: MissionDto | undefined = findMissionByDescription(arg.event._def.extendedProps.description);
+            handleDeleteMission(selectedMission);
+        };
+        eventContainer?.appendChild(crossIcon);
+        index++;
+    }
 
     const findMissionByDescription = (description: string) => {
         return missions.find(mission => mission.description === description);
@@ -45,8 +64,17 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
         updateMissionByDateRange(selectedMission!.id, formattedStartDate, formattedEndDate);
     }
 
+    const handleDeleteMission = (selectedMission: MissionDto | undefined) => {
+        if (!selectedMission) return;
+        if (window.confirm("Are you sure you want to delete this mission?")) {
+            const updatedMissions = missions.filter(mission => mission.id !== selectedMission.id);
+            setMissions(updatedMissions);
+        }
+    };
+
     return {
         tooltips,
-        handleChangeEvent
+        handleChangeEvent,
+        handleMountEvent
     };
 };

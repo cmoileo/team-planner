@@ -6,10 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import {Dispatch, SetStateAction} from "react";
 
 export const CalendarLayout = ({ missions, setMissions }: { missions: MissionDto[], setMissions: Dispatch<SetStateAction<MissionDto[]>> }) => {
-    const { tooltips, handleChangeEvent} = useCalendarViewModel({missions, setMissions});
-    let index = 0;
-
-    console.log(missions);
+    const { tooltips, handleChangeEvent, handleMountEvent} = useCalendarViewModel({missions, setMissions});
 
     return (
         <div className="calendar-container">
@@ -17,10 +14,7 @@ export const CalendarLayout = ({ missions, setMissions }: { missions: MissionDto
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
                 events={missions.map(({ id, ...rest }) => rest)}
-                eventDidMount={(arg) => {
-                    arg.el.dataset.tooltipId = `my-tooltip-${index}`;
-                    index++;
-                }}
+                eventDidMount={(arg) => handleMountEvent(arg)}
                 droppable={true}
                 editable={true}
                 eventResizableFromStart={true}
