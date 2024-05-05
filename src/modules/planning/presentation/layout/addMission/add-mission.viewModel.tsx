@@ -32,8 +32,8 @@ export const useAddMissionViewModel = (
         e.preventDefault()
         const target = e.target as HTMLFormElement
         const newMission: MissionDto = {
-            id: missions ? missions.length : 0,
-            missionId: missions ? missions.length : 0,
+            id: missions ? missions[missions.length - 1].id + 1 : 0,
+            missionId: missions ? missions[missions.length - 1].missionId + 1 : 0,
             title: target.missionTitle.value,
             description: target.description.value,
             start: target.start.value,

@@ -105,9 +105,9 @@ export const useCalendarViewModel = (
     const handleDeleteMission = (selectedMission: MissionDto | undefined) => {
         if (!selectedMission) return;
         if (window.confirm("Are you sure you want to delete this mission?")) {
-            const updatedMissions = missions.filter(mission => mission.id !== selectedMission.id);
+            const updatedMissions = missions.filter(mission => mission.missionId !== selectedMission.missionId);
             setMissions(updatedMissions);
-            const updatedFilteredMissions = filteredMissions.filter(mission => mission.id !== selectedMission.id);
+            const updatedFilteredMissions = filteredMissions.filter(filteredMission => filteredMission.missionId !== selectedMission.missionId);
             setFilteredMissions(updatedFilteredMissions);
         }
     };
