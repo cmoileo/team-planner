@@ -2,19 +2,16 @@
   {
     "userId": 0,
     "name": "leo",
-    "profilePicture": "https://contents.bebee.com/users/id/5X7p363c6c32488953/_avatar-h9ymT-400.png",
-    "missions": [1, 2]
+    "profilePicture": "https://contents.bebee.com/users/id/5X7p363c6c32488953/_avatar-h9ymT-400.png"
   },
   {
     "userId": 1,
     "name": "james",
-    "profilePicture": "https://media.licdn.com/dms/image/C4E03AQGsEL9EnEFMSw/profile-displayphoto-shrink_800_800/0/1641754100462?e=2147483647&v=beta&t=F5XrG2KRpRyiUg-MLCcQIX7RebSNAX3_8R3TL4yB8ZQ",
-    "missions": [3]
+    "profilePicture": "https://media.licdn.com/dms/image/C4E03AQGsEL9EnEFMSw/profile-displayphoto-shrink_800_800/0/1641754100462?e=2147483647&v=beta&t=F5XrG2KRpRyiUg-MLCcQIX7RebSNAX3_8R3TL4yB8ZQ"
   },
   {
     "userId": 2,
     "name": "john",
-    "profilePicture": "https://contents.bebee.com/users/id/5X7p363c6c32488953/_avatar-h9ymT-400.png",
-    "missions": [0, 2]
+    "profilePicture": "https://contents.bebee.com/users/id/5X7p363c6c32488953/_avatar-h9ymT-400.png"
   }
 ]

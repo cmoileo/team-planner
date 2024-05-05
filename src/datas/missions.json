@@ -6,7 +6,8 @@
     "start": "2024-05-03",
     "end": "2024-05-04",
     "description": "Lorem ipsum 1",
-    "imageurl": "https://contents.bebee.com/users/id/5X7p363c6c32488953/_avatar-h9ymT-400.png"
+    "imageurl": "https://contents.bebee.com/users/id/5X7p363c6c32488953/_avatar-h9ymT-400.png",
+    "assignedUsers": [0, 1]
   },
   {
     "id": 1,
@@ -15,7 +16,8 @@
     "start": "2024-05-03",
     "end": "2024-05-05",
     "backgroundColor": "red",
-    "description": "Lorem ipsum 2"
+    "description": "Lorem ipsum 2",
+    "assignedUsers": [0, 1]
   },
   {
     "id": 2,
@@ -24,7 +26,8 @@
     "start": "2024-05-03",
     "end": "2024-05-04",
     "backgroundColor": "green",
-    "description": "Lorem ipsum 3"
+    "description": "Lorem ipsum 3",
+    "assignedUsers": [0, 1]
   },
   {
     "id": 3,
@@ -33,6 +36,7 @@
     "start": "2024-05-03",
     "end": "2024-05-05",
     "backgroundColor": "blue",
-    "description": "Lorem ipsum 4"
+    "description": "Lorem ipsum 4",
+    "assignedUsers": [0, 1]
   }
 ]

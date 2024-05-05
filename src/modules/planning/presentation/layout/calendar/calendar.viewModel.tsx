@@ -40,13 +40,14 @@ export const useCalendarViewModel = (
         eventContainer?.appendChild(crossIcon);
     }
     const addAssignedUsersImages = (arg: any, eventContainer: HTMLDivElement) => {
-        const assignedUsers = users.find(user => user.missions.includes(arg.event._def.extendedProps.missionId))?.missions;
-        if (!assignedUsers) return;
+        const assignedUsers = arg.event._def.extendedProps.assignedUsers;
+        if (!assignedUsers || !assignedUsers) return;
         const imagesContainer = document.createElement("div");
         imagesContainer.className = "flex gap-2";
         eventContainer?.appendChild(imagesContainer);
         assignedUsers.forEach((assignedUser: number) => {
             const user = users.find(user => user.userId === assignedUser);
+            console.log(user)
             if (!user) return;
             const userImage = document.createElement("img");
             userImage.src = user.profilePicture;

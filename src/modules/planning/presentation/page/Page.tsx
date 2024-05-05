@@ -11,8 +11,8 @@ export const PlanningPage = () => {
     const [users, setUsers] = useState<UserDto[]>(dataUsers);
     return (
         <div className={"w-10/12 m-auto flex flex-col gap-12 mt-20 pb-16"}>
-            <AddMissionLayout missions={missions} setMissions={setMissions} />
-            <CalendarLayout missions={missions} setMissions={setMissions} users={users} setUsers={setUsers} />
+            <AddMissionLayout missions={missions} setMissions={setMissions} users={users} setUsers={setUsers} />
+            <CalendarLayout missions={missions} setMissions={setMissions} users={users} />
         </div>
     )
 }

@@ -3,9 +3,21 @@ import {useAddMissionViewModel} from "./add-mission.viewModel.tsx";
 import MainText from "../../../../../ui/MainText.tsx";
 import {MissionDto} from "../../../domain/dto/Mission.dto.ts";
 import {Dispatch, SetStateAction} from "react";
+import {UserDto} from "../../../domain/dto/User.dto.ts";
 
-export const AddMissionLayout = ({missions, setMissions}: {missions: MissionDto[] | null, setMissions: Dispatch<SetStateAction<MissionDto[]>> }) => {
-    const {handleOpenModal, handleAddMission, modalRef, shadowRef} = useAddMissionViewModel({missions, setMissions});
+export const AddMissionLayout = (
+    {
+        missions,
+        setMissions,
+        users,
+        setUsers
+    }: {
+        missions: MissionDto[] | null,
+        setMissions: Dispatch<SetStateAction<MissionDto[]>>,
+        users: UserDto[],
+        setUsers: Dispatch<SetStateAction<UserDto[]>>
+    }) => {
+    const {handleOpenModal, handleAddMission, modalRef, shadowRef} = useAddMissionViewModel({missions, setMissions, users, setUsers});
     return (
         <div>
             <MainButton onClick={handleOpenModal} children={"Add mission"} />
@@ -19,6 +31,10 @@ export const AddMissionLayout = ({missions, setMissions}: {missions: MissionDto[
                 <input required type="date" name={"date"} />
                 <MainText htmltag={"label"} children={"Mission color"} />
                 <input required type="color" name={"color"} />
+                <MainText htmltag={"label"} children={"Assigned users"} />
+                <select required name={"assignedUsers"} multiple>
+                    {users.map(user => <option key={user.userId} value={user.userId}>{user.name}</option>)}
+                </select>
                 <MainButton children={"Submit"} />
             </form>
         </div>

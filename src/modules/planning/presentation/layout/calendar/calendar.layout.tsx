@@ -15,7 +15,6 @@ export const CalendarLayout = (
         missions: MissionDto[],
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
         users: UserDto[],
-        setUsers: Dispatch<SetStateAction<UserDto[]>>
     }) => {
     const { tooltips, handleChangeEvent, handleMountEvent} = useCalendarViewModel({missions, setMissions, users});
 
