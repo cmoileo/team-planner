@@ -61,7 +61,7 @@ export const useCalendarViewModel = (
             if (!user) return;
             const userImage = document.createElement("img");
             userImage.src = user.profilePicture;
-            userImage.className = "w-6 h-6 rounded-full";
+            userImage.className = "w-6 h-6 rounded-full object-cover";
             imagesContainer?.appendChild(userImage);
         });
     }

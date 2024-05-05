@@ -7,5 +7,5 @@ export type MissionDto = {
     start?: string;
     end?: string;
     backgroundColor?: string;
-    assignedUsers?: number[];
+    assignedUsers: number[];
 }

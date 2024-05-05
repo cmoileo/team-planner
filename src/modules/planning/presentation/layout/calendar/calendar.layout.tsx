@@ -8,10 +8,12 @@ import {UserDto} from "../../../domain/dto/User.dto.ts";
 
 export const CalendarLayout = (
     {
+        filteredMissions,
         missions,
         setMissions,
         users
     }: {
+        filteredMissions: MissionDto[],
         missions: MissionDto[],
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
         users: UserDto[],
@@ -23,7 +25,7 @@ export const CalendarLayout = (
             <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
-                events={missions.map(({ id, ...rest }) => rest)}
+                events={filteredMissions.map(({ id, ...rest }) => rest)}
                 eventDidMount={(arg) => handleMountEvent(arg)}
                 droppable={true}
                 editable={true}
