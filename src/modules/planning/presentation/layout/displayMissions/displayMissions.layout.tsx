@@ -25,6 +25,7 @@ export const DisplayMissionsLayout = (
         <div className="flex flex-col gap-10">
             {
                 missions.map((mission) => {
+                    console.log(mission.backgroundColor)
                     return (
                         <form onSubmit={handleChangeEvent} key={mission.id} id={String(mission.id)} className={"flex gap-10 items-center"}>
                             <input className={"border p-2"} type="text" defaultValue={mission.title} name={"missionTitle"}/>
@@ -42,6 +43,7 @@ export const DisplayMissionsLayout = (
                                     );
                                 })}
                             </select>
+                            <input className={"border p-2"} type="color" defaultValue={mission.backgroundColor} name={"color"}/>
                             <MainButton>Save changes</MainButton>
                         </form>
                     );

@@ -30,7 +30,8 @@ export const useDisplayMissionsViewModel = (
                     assignedUsers: Array.from(target.assignedUsers.selectedOptions).map((option: any): number => {
                         const value = option.value
                         return Number(value)
-                    })
+                    }),
+                    backgroundColor: target.color.value
                 }
             }
             return mission
@@ -46,7 +47,8 @@ export const useDisplayMissionsViewModel = (
                     assignedUsers: Array.from(target.assignedUsers.selectedOptions).map((option: any): number => {
                         const value = option.value
                         return Number(value)
-                    })
+                    }),
+                    backgroundColor: target.color.value
                 }
             }
             return mission
