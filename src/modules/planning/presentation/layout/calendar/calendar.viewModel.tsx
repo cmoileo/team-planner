@@ -3,17 +3,37 @@ import {Tooltip as ReactTooltip} from "react-tooltip";
 import {Dispatch, SetStateAction} from "react";
 
 export const useCalendarViewModel = ({missions, setMissions}: {missions: MissionDto[], setMissions: Dispatch<SetStateAction<MissionDto[]>>}) => {
-    const filteredMissions = missions.filter(mission => mission.date);
+    const filteredMissions = missions.filter(mission => mission.start && mission.end);
 
     const sortedMissions = filteredMissions.sort((a, b) => {
-        const dateA = new Date(a.date!);
-        const dateB = new Date(b.date!);
+        const startDateA = a.start ? new Date(a.start) : null;
+        const startDateB = b.start ? new Date(b.start) : null;
 
-        if (dateA.getTime() === dateB.getTime()) {
-            return missions.indexOf(b) - missions.indexOf(a);
+        const endDateA = a.end ? new Date(a.end) : null;
+        const endDateB = b.end ? new Date(b.end) : null;
+
+        if (startDateA && startDateB) {
+            if (startDateA.getTime() !== startDateB.getTime()) {
+                return startDateA.getTime() - startDateB.getTime();
+            }
+        } else if (startDateA && !startDateB) {
+            return -1;
+        } else if (!startDateA && startDateB) {
+            return 1;
         }
-        return dateA.getTime() - dateB.getTime();
+
+        if (endDateA && endDateB) {
+            if (endDateA.getTime() !== endDateB.getTime()) {
+                return endDateA.getTime() - endDateB.getTime();
+            }
+        } else if (endDateA && !endDateB) {
+            return -1;
+        } else if (!endDateA && endDateB) {
+            return 1;
+        }
+        return missions.indexOf(a) - missions.indexOf(b);
     });
+
 
     const tooltips = sortedMissions.map((mission, index) => (
         <ReactTooltip
@@ -38,12 +58,13 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
         return missions.find(mission => mission.description === description);
     }
 
-    const updateMission = (missionId: number, newDate: string) => {
+    const updateMissionByDateRange = (missionId: number, newStartDate: string, newEndDate: string) => {
         const updatedMissions = missions.map(mission => {
             if (mission.id === missionId) {
                 return {
                     ...mission,
-                    date: newDate
+                    start: newStartDate,
+                    end: newEndDate
                 }
             }
             return mission;
@@ -52,11 +73,14 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
     }
 
     const handleChangeEvent = (arg: any) => {
-        const newDate = new Date(arg.event._instance.range.start);
-        const formattedDate = convertDate(newDate.toISOString());
+        console.log(arg.event._instance.range.start, arg.event._instance.range.end)
+        const newStartDate = new Date(arg.event._instance.range.start);
+        const newEndDate = new Date(arg.event._instance.range.end);
+        const formattedStartDate = convertDate(newStartDate.toISOString());
+        const formattedEndDate = convertDate(newEndDate.toISOString());
         const description = arg.event._def.extendedProps.description;
         const selectedMission = findMissionByDescription(description);
-        updateMission(selectedMission!.id, formattedDate);
+        updateMissionByDateRange(selectedMission!.id, formattedStartDate, formattedEndDate);
     }
 
     return {
