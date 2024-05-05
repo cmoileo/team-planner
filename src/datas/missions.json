@@ -3,7 +3,7 @@
     "id": 0,
     "title": "The Shawshank Redemption",
     "start": "2024-05-03",
-    "end": "2024-05-05",
+    "end": "2024-05-04",
     "description": "Lorem ipsum 1"
   },
   {
@@ -18,7 +18,7 @@
     "id": 2,
     "title": "The Dark Knight",
     "start": "2024-05-03",
-    "end": "2024-05-05",
+    "end": "2024-05-04",
     "backgroundColor": "green",
     "description": "Lorem ipsum 3"
   },

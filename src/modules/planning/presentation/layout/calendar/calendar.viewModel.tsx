@@ -12,32 +12,37 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
         const endDateA = a.end ? new Date(a.end) : null;
         const endDateB = b.end ? new Date(b.end) : null;
 
+        // Comparer les dates de début
         if (startDateA && startDateB) {
             if (startDateA.getTime() !== startDateB.getTime()) {
                 return startDateA.getTime() - startDateB.getTime();
             }
         } else if (startDateA && !startDateB) {
-            return -1;
+            return -1; // Placer l'événement avec une date de début définie en premier
         } else if (!startDateA && startDateB) {
-            return 1;
+            return 1; // Placer l'événement avec une date de début définie en premier
         }
 
+        // Si les dates de début sont les mêmes, comparer les dates de fin
         if (endDateA && endDateB) {
             if (endDateA.getTime() !== endDateB.getTime()) {
-                return endDateA.getTime() - endDateB.getTime();
+                return endDateB.getTime() - endDateA.getTime(); // Inverser l'ordre des dates de fin
             }
         } else if (endDateA && !endDateB) {
-            return -1;
+            return -1; // Placer l'événement avec une date de fin définie en premier
         } else if (!endDateA && endDateB) {
-            return 1;
+            return 1; // Placer l'événement avec une date de fin définie en premier
         }
+
+        // Si les dates de début et de fin sont les mêmes, inverser l'ordre
         if (startDateA && startDateB && startDateA.getTime() === startDateB.getTime() &&
             endDateA && endDateB && endDateA.getTime() === endDateB.getTime()) {
             return missions.indexOf(b) - missions.indexOf(a);
         }
+
+        // Par défaut, conserver l'ordre d'origine
         return missions.indexOf(a) - missions.indexOf(b);
     });
-
 
 
     const tooltips = sortedMissions.map((mission, index) => (
