@@ -77,8 +77,8 @@ export const useCalendarViewModel = (
         return missions.find(mission => mission.missionId === missionId);
     }
 
-    const updateMissionByDateRange = (missionId: number, newStartDate: string, newEndDate: string) => {
-        const updatedMissions = missions.map(mission => {
+    const updateMissionByDateRange = (missionId: number, newStartDate: string, newEndDate: string, objectToChange: MissionDto[], setObjectToChange: Dispatch<SetStateAction<MissionDto[]>>) => {
+        const updatedMissions = objectToChange.map(mission => {
             if (mission.id === missionId) {
                 return {
                     ...mission,
@@ -88,18 +88,7 @@ export const useCalendarViewModel = (
             }
             return mission;
         });
-        const updatedFilteredMissions = filteredMissions.map(mission => {
-            if (mission.id === missionId) {
-                return {
-                    ...mission,
-                    start: newStartDate,
-                    end: newEndDate
-                }
-            }
-            return mission;
-        })
-        setMissions(updatedMissions);
-        setFilteredMissions(updatedFilteredMissions);
+        setObjectToChange(updatedMissions);
     }
 
     const handleChangeEvent = (arg: any) => {
@@ -109,7 +98,8 @@ export const useCalendarViewModel = (
         const formattedEndDate = convertDate(newEndDate.toISOString());
         const missionId = arg.event._def.extendedProps.missionId;
         const selectedMission = findMissionById(missionId)
-        updateMissionByDateRange(selectedMission!.id, formattedStartDate, formattedEndDate);
+        updateMissionByDateRange(selectedMission!.id, formattedStartDate, formattedEndDate, missions, setMissions);
+        updateMissionByDateRange(selectedMission!.id, formattedStartDate, formattedEndDate, filteredMissions, setFilteredMissions);
     }
 
     const handleDeleteMission = (selectedMission: MissionDto | undefined) => {
@@ -117,6 +107,8 @@ export const useCalendarViewModel = (
         if (window.confirm("Are you sure you want to delete this mission?")) {
             const updatedMissions = missions.filter(mission => mission.id !== selectedMission.id);
             setMissions(updatedMissions);
+            const updatedFilteredMissions = filteredMissions.filter(mission => mission.id !== selectedMission.id);
+            setFilteredMissions(updatedFilteredMissions);
         }
     };
 
