@@ -17,7 +17,7 @@ export const PlanningPage = () => {
             <AddMissionLayout missions={missions} setMissions={setMissions} users={users} filteredMissions={filteredMissions} setFilteredMissions={setFilteredMissions} />
             <FilerMissionsLayout filteredMissions={filteredMissions} setFilteredMissions={setFilteredMissions} users={users} missions={missions} setMissions={setMissions} />
             <CalendarLayout filteredMissions={filteredMissions} missions={missions} setMissions={setMissions} users={users} setFilteredMissions={setFilteredMissions} />
-            <DisplayMissionsLayout missions={missions} setMissions={setMissions} filteredMissions={filteredMissions} setFilteredMissions={setFilteredMissions} />
+            <DisplayMissionsLayout missions={missions} setMissions={setMissions} filteredMissions={filteredMissions} setFilteredMissions={setFilteredMissions} users={users} />
         </div>
     )
 }

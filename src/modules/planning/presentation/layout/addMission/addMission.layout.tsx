@@ -23,7 +23,7 @@ export const AddMissionLayout = (
         <div>
             <div className={"flex justify-between"}>
                 <MainButton onClick={handleOpenModal} children={"Add mission"} />
-                <MainButton onClick={() => console.log(missions)} children={"Save modifications"} />
+                <MainButton onClick={() => console.log("updated missions :", missions)} children={"Save modifications"} />
             </div>
             <div onClick={handleOpenModal} ref={shadowRef} className={"hidden w-screen h-screen fixed top-0 left-0 opacity-75 bg-black z-10"}></div>
             <form onSubmit={handleAddMission} ref={modalRef} className={"hidden flex flex-col gap-6 absolute p-16 bg-white rounded-2xl z-20"}>

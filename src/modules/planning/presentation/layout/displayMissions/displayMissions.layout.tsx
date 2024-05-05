@@ -3,18 +3,21 @@ import {Dispatch, SetStateAction} from "react";
 import {useDisplayMissionsViewModel} from "./displayMissions.viewModel.tsx";
 import {MainButton} from "../../../../../ui/MainButton.tsx";
 import MainText from "../../../../../ui/MainText.tsx";
+import {UserDto} from "../../../domain/dto/User.dto.ts";
 
 export const DisplayMissionsLayout = (
     {
         missions,
         setMissions,
         filteredMissions,
-        setFilteredMissions
+        setFilteredMissions,
+        users
     }: {
         missions: MissionDto[],
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
         filteredMissions: MissionDto[],
-        setFilteredMissions: Dispatch<SetStateAction<MissionDto[]>>
+        setFilteredMissions: Dispatch<SetStateAction<MissionDto[]>>,
+        users: UserDto[]
     }) => {
     const {handleChangeEvent} = useDisplayMissionsViewModel({missions, setMissions, filteredMissions, setFilteredMissions});
 
@@ -29,6 +32,16 @@ export const DisplayMissionsLayout = (
                             <input className={"border p-2"} type="date" defaultValue={mission.start} name={"start"}/>
                             <MainText>-</MainText>
                             <input className={"border p-2"} type="date" defaultValue={mission.end} name={"end"}/>
+                            <select className="border p-2" name="assignedUsers" multiple>
+                                {users.map((user) => {
+                                    const isSelected = mission.assignedUsers.includes(user.userId);
+                                    return (
+                                        <option key={user.userId} value={user.userId} selected={isSelected}>
+                                            {user.name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
                             <MainButton>Save changes</MainButton>
                         </form>
                     );

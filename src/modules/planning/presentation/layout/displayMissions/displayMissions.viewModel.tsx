@@ -25,6 +25,12 @@ export const useDisplayMissionsViewModel = (
                     ...mission,
                     name: target.missionTitle.value,
                     description: target.description.value,
+                    start: target.start.value,
+                    end: target.end.value,
+                    assignedUsers: Array.from(target.assignedUsers.selectedOptions).map((option: any): number => {
+                        const value = option.value
+                        return Number(value)
+                    })
                 }
             }
             return mission
@@ -36,7 +42,11 @@ export const useDisplayMissionsViewModel = (
                     title: target.missionTitle.value,
                     description: target.description.value,
                     start: target.start.value,
-                    end: target.end.value
+                    end: target.end.value,
+                    assignedUsers: Array.from(target.assignedUsers.selectedOptions).map((option: any): number => {
+                        const value = option.value
+                        return Number(value)
+                    })
                 }
             }
             return mission
