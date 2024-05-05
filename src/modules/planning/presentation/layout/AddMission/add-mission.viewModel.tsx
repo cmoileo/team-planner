@@ -1,18 +1,13 @@
 import {Dispatch, SetStateAction, useRef} from "react";
 import {MissionDto} from "../../../domain/dto/Mission.dto.ts";
-import {UserDto} from "../../../domain/dto/User.dto.ts";
 
 export const useAddMissionViewModel = (
     {
         missions,
         setMissions,
-        users,
-        setUsers
     }: {
         missions: MissionDto[] | null,
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
-        users: UserDto[],
-        setUsers: Dispatch<SetStateAction<UserDto[]>>
     }) => {
     const modalRef = useRef<HTMLFormElement>(null);
     const shadowRef = useRef<HTMLDivElement>(null);
@@ -39,7 +34,10 @@ export const useAddMissionViewModel = (
             description: target.description.value,
             date: target.date.value,
             backgroundColor: target.color.value,
-            assignedUsers: Array.from(target.assignedUsers.selectedOptions).map(option => Number(option.value))
+            assignedUsers: Array.from(target.assignedUsers.selectedOptions).map((option: any): number => {
+                const value = option.value
+                return Number(value)
+            })
         }
         missions ? setMissions([...missions, newMission]) : setMissions([newMission])
         modalRef.current.reset()

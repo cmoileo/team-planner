@@ -10,14 +10,12 @@ export const AddMissionLayout = (
         missions,
         setMissions,
         users,
-        setUsers
     }: {
         missions: MissionDto[] | null,
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
         users: UserDto[],
-        setUsers: Dispatch<SetStateAction<UserDto[]>>
     }) => {
-    const {handleOpenModal, handleAddMission, modalRef, shadowRef} = useAddMissionViewModel({missions, setMissions, users, setUsers});
+    const {handleOpenModal, handleAddMission, modalRef, shadowRef} = useAddMissionViewModel({missions, setMissions});
     return (
         <div>
             <MainButton onClick={handleOpenModal} children={"Add mission"} />

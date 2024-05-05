@@ -47,7 +47,6 @@ export const useCalendarViewModel = (
         eventContainer?.appendChild(imagesContainer);
         assignedUsers.forEach((assignedUser: number) => {
             const user = users.find(user => user.userId === assignedUser);
-            console.log(user)
             if (!user) return;
             const userImage = document.createElement("img");
             userImage.src = user.profilePicture;
@@ -61,8 +60,8 @@ export const useCalendarViewModel = (
         const eventContainer = arg.el.querySelector(".fc-event-title-container");
         eventContainer?.classList.add("flex");
         eventContainer?.classList.add("justify-between");
-        handleCreateCrossIcon(arg, eventContainer);
         addAssignedUsersImages(arg, eventContainer);
+        handleCreateCrossIcon(arg, eventContainer);
         index++;
     }
     const findMissionByDescription = (description: string) => {
