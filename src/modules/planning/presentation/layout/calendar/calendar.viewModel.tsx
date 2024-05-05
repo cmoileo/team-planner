@@ -3,8 +3,18 @@ import {Tooltip as ReactTooltip} from "react-tooltip";
 import {Dispatch, SetStateAction} from "react";
 import {sortedMissions} from "../../../domain/use-case/sort-mission.service.ts";
 import {convertDate} from "../../../domain/use-case/convert-date.service.ts";
+import {UserDto} from "../../../domain/dto/User.dto.ts";
 
-export const useCalendarViewModel = ({missions, setMissions}: {missions: MissionDto[], setMissions: Dispatch<SetStateAction<MissionDto[]>>}) => {
+export const useCalendarViewModel = (
+    {
+        missions,
+        setMissions,
+        users,
+    }: {
+        missions: MissionDto[],
+        setMissions: Dispatch<SetStateAction<MissionDto[]>>,
+        users: UserDto[],
+    }) => {
     let index = 0;
     const filteredMissions = missions.filter(mission => mission.start && mission.end);
 
@@ -18,12 +28,7 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
         />
     ));
 
-    const handleMountEvent = (arg: any) => {
-        arg.el.dataset.tooltipId = `my-tooltip-${index}`;
-        arg.el.dataset.id = index.toString();
-        const eventContainer = arg.el.querySelector(".fc-event-title-container");
-        eventContainer?.classList.add("flex");
-        eventContainer?.classList.add("justify-between");
+    const handleCreateCrossIcon = (arg: any, eventContainer: HTMLDivElement) => {
         const crossIcon = document.createElement("span");
         crossIcon.className = "cross-icon relative right-2";
         crossIcon.innerHTML = "&times;";
@@ -33,11 +38,38 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
             handleDeleteMission(selectedMission);
         };
         eventContainer?.appendChild(crossIcon);
+    }
+    const addAssignedUsersImages = (arg: any, eventContainer: HTMLDivElement) => {
+        const assignedUsers = users.find(user => user.missions.includes(arg.event._def.extendedProps.missionId))?.missions;
+        if (!assignedUsers) return;
+        const imagesContainer = document.createElement("div");
+        imagesContainer.className = "flex gap-2";
+        eventContainer?.appendChild(imagesContainer);
+        assignedUsers.forEach((assignedUser: number) => {
+            const user = users.find(user => user.userId === assignedUser);
+            if (!user) return;
+            const userImage = document.createElement("img");
+            userImage.src = user.profilePicture;
+            userImage.className = "w-6 h-6 rounded-full";
+            imagesContainer?.appendChild(userImage);
+        });
+    }
+    const handleMountEvent = (arg: any) => {
+        arg.el.dataset.tooltipId = `my-tooltip-${index}`;
+        arg.el.dataset.id = index.toString();
+        const eventContainer = arg.el.querySelector(".fc-event-title-container");
+        eventContainer?.classList.add("flex");
+        eventContainer?.classList.add("justify-between");
+        handleCreateCrossIcon(arg, eventContainer);
+        addAssignedUsersImages(arg, eventContainer);
         index++;
     }
-
     const findMissionByDescription = (description: string) => {
         return missions.find(mission => mission.description === description);
+    }
+
+    const findMissionById = (missionId: number) => {
+        return missions.find(mission => mission.missionId === missionId);
     }
 
     const updateMissionByDateRange = (missionId: number, newStartDate: string, newEndDate: string) => {
@@ -59,8 +91,8 @@ export const useCalendarViewModel = ({missions, setMissions}: {missions: Mission
         const newEndDate = new Date(arg.event._instance.range.end);
         const formattedStartDate = convertDate(newStartDate.toISOString());
         const formattedEndDate = convertDate(newEndDate.toISOString());
-        const description = arg.event._def.extendedProps.description;
-        const selectedMission = findMissionByDescription(description);
+        const missionId = arg.event._def.extendedProps.missionId;
+        const selectedMission = findMissionById(missionId)
         updateMissionByDateRange(selectedMission!.id, formattedStartDate, formattedEndDate);
     }
 

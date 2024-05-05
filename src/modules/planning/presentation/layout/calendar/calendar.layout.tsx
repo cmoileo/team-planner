@@ -4,9 +4,20 @@ import { MissionDto } from "../../../domain/dto/Mission.dto.ts";
 import {useCalendarViewModel} from "./calendar.viewModel.tsx";
 import interactionPlugin from "@fullcalendar/interaction";
 import {Dispatch, SetStateAction} from "react";
+import {UserDto} from "../../../domain/dto/User.dto.ts";
 
-export const CalendarLayout = ({ missions, setMissions }: { missions: MissionDto[], setMissions: Dispatch<SetStateAction<MissionDto[]>> }) => {
-    const { tooltips, handleChangeEvent, handleMountEvent} = useCalendarViewModel({missions, setMissions});
+export const CalendarLayout = (
+    {
+        missions,
+        setMissions,
+        users
+    }: {
+        missions: MissionDto[],
+        setMissions: Dispatch<SetStateAction<MissionDto[]>>,
+        users: UserDto[],
+        setUsers: Dispatch<SetStateAction<UserDto[]>>
+    }) => {
+    const { tooltips, handleChangeEvent, handleMountEvent} = useCalendarViewModel({missions, setMissions, users});
 
     return (
         <div className="calendar-container">

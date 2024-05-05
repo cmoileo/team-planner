@@ -1,5 +1,6 @@
 export type MissionDto = {
     id: number;
+    missionId: number;
     title: string;
     description: string;
     date?: string;
