@@ -23,7 +23,7 @@ export const FilerMissionsLayout = (
     return (
         <div className={"flex flex-col gap-10"}>
             <MainText htmltag={"h2"} className={"text-2xl"} children={"Filter by users"} />
-            <MainButton onClick={handleResetFilters} children={"Reste filters"} />
+            <MainButton onClick={handleResetFilters} children={"Reset filters"} />
             <div className={"flex gap-12"}>
                 {
                     users.map((user: UserDto) => (

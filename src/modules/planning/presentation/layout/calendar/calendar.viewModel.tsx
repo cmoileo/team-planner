@@ -10,13 +10,17 @@ export const useCalendarViewModel = (
         missions,
         setMissions,
         users,
+        setFilteredMissions,
+        filteredMissions
     }: {
         missions: MissionDto[],
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
         users: UserDto[],
+        setFilteredMissions: Dispatch<SetStateAction<MissionDto[]>>,
+        filteredMissions: MissionDto[]
     }) => {
     let index = 0;
-    const filteredMissions = missions.filter(mission => mission.start && mission.end);
+    const filteredMissionsByDate = missions.filter(mission => mission.start && mission.end);
 
     const handleMountEvent = (arg: any) => {
         arg.el.dataset.tooltipId = `my-tooltip-${index}`;
@@ -29,7 +33,7 @@ export const useCalendarViewModel = (
         index++;
     }
 
-    const tooltips = sortedMissions(missions, filteredMissions).map((mission, index) => (
+    const tooltips = sortedMissions(missions, filteredMissionsByDate).map((mission, index) => (
         <ReactTooltip
             id={`my-tooltip-${index}`}
             key={index}
@@ -84,7 +88,18 @@ export const useCalendarViewModel = (
             }
             return mission;
         });
+        const updatedFilteredMissions = filteredMissions.map(mission => {
+            if (mission.id === missionId) {
+                return {
+                    ...mission,
+                    start: newStartDate,
+                    end: newEndDate
+                }
+            }
+            return mission;
+        })
         setMissions(updatedMissions);
+        setFilteredMissions(updatedFilteredMissions);
     }
 
     const handleChangeEvent = (arg: any) => {

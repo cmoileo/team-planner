@@ -15,7 +15,7 @@ export const PlanningPage = () => {
         <div className={"w-10/12 m-auto flex flex-col gap-12 mt-20 pb-16"}>
             <AddMissionLayout missions={missions} setMissions={setMissions} users={users} />
             <FilerMissionsLayout filteredMissions={filteredMissions} setFilteredMissions={setFilteredMissions} users={users} missions={missions} setMissions={setMissions} />
-            <CalendarLayout filteredMissions={filteredMissions} missions={missions} setMissions={setMissions} users={users} />
+            <CalendarLayout filteredMissions={filteredMissions} missions={missions} setMissions={setMissions} users={users} setFilteredMissions={setFilteredMissions} />
         </div>
     )
 }

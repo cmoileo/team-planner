@@ -11,14 +11,16 @@ export const CalendarLayout = (
         filteredMissions,
         missions,
         setMissions,
-        users
+        users,
+        setFilteredMissions
     }: {
         filteredMissions: MissionDto[],
         missions: MissionDto[],
         setMissions: Dispatch<SetStateAction<MissionDto[]>>,
         users: UserDto[],
+        setFilteredMissions: Dispatch<SetStateAction<MissionDto[]>>
     }) => {
-    const { tooltips, handleChangeEvent, handleMountEvent} = useCalendarViewModel({missions, setMissions, users});
+    const { tooltips, handleChangeEvent, handleMountEvent} = useCalendarViewModel({missions, setMissions, users, setFilteredMissions, filteredMissions});
 
     return (
         <div className="calendar-container">
